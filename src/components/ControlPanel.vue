@@ -19,9 +19,7 @@ const showSetting = () => {
   isOpen.value = !isOpen.value
 }
 
-const settingControl: SettingControl = {
-  value: null
-}
+const settingControl: SettingControl = ref(null)
 
 const handleClickOutside = (event: MouseEvent) => {
   if (settingControl.value && !settingControl.value.contains(event.target as Node)) {
