@@ -59,3 +59,11 @@ Please describe the added features in the README.
 6. Create Loading, Modal and apply it: 19:00 - 19:30
 
 7. Write UT: 22:00 - 23:30
+
+
+# Add-on functionality(Optional question)
+Features may develop in the next phase: 
+
+1. Show Image Modal and can Zoom in, zoom out the image
+2. Allow the tick option to select images
+3. Allows users to delete a series of photos once selected
