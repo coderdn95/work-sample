@@ -1,15 +1,18 @@
+Pattern
+![スクリーンショット 2024-01-31 23 59 01](https://github.com/coderdn95/work-sample/assets/157488103/cd2ffa64-583e-4434-99dd-c163b2eb2a7e)
+
 # Start Project 26/06/2024
 
 1. Initial Project: 17:49 - 19:00
-
 - Create a new project
 - Create HTMl CSS for ProductList
 
 2. Create Control Setting: 23:00 -24:00
-
+   
 # 27/06/2024
 
 3. Handle Prev, Next And Delete: 0:15 - 01:50
+
 
 4. Validation Input: 18:30 - 18:35
 
