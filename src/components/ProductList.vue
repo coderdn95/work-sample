@@ -7,7 +7,15 @@ import axios from 'axios'
 import Modal from './Modal.vue'
 import Loading from './Loading.vue'
 
-const state = reactive({
+interface State {
+  images: string[]
+  upLoadFiles: string[]
+  isLoading: boolean
+  errorMessage: string
+  showModal: boolean
+}
+
+const state: State = reactive({
   images: [],
   upLoadFiles: [],
   isLoading: false,

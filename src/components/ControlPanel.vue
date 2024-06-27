@@ -4,20 +4,27 @@ import IconLeft from './icons/IconLeft.vue'
 import IconNext from './icons/IconNext.vue'
 import IconBin from './icons/IconBin.vue'
 
+interface SettingControl {
+  value: HTMLElement | null
+}
+
 const props = defineProps({
   index: Number,
   imgLength: Number
 })
 
 const isOpen = ref(false)
-const settingControl = ref(null)
 
 const showSetting = () => {
   isOpen.value = !isOpen.value
 }
 
+const settingControl: SettingControl = {
+  value: null
+}
+
 const handleClickOutside = (event: MouseEvent) => {
-  if (settingControl.value && !settingControl.value.contains(event.target)) {
+  if (settingControl.value && !settingControl.value.contains(event.target as Node)) {
     isOpen.value = false
   }
 }
