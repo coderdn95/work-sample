@@ -133,7 +133,7 @@ const onSubmit = async () => {
   </div>
   <div class="wrapper">
     <Modal v-if="state.showModal" message="Your data was saved!" :duration="3000"></Modal>
-    <Banner />
+    <Banner :images="state.localImages" />
     <main>
       <div class="previewWrapper">
         <template v-if="state.images.length">
@@ -264,6 +264,7 @@ main {
   border: 1px solid var(--vt-c-dark);
   border-radius: 4px;
   position: relative;
+  height: 270px;
 }
 
 .controlPanel {
