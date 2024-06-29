@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, ref, onMounted, onBeforeUnmount } from 'vue'
+import { reactive } from 'vue'
 import IconFolder from './icons/IconFolder.vue'
 import Banner from './Banner.vue'
 import ControlPanel from './ControlPanel.vue'
@@ -7,9 +7,14 @@ import axios from 'axios'
 import Modal from './Modal.vue'
 import Loading from './Loading.vue'
 
+interface localImage {
+  name: string
+  path: string | ArrayBuffer
+}
+
 interface State {
   images: string[]
-  upLoadFiles: string[]
+  localImages: localImage[]
   isLoading: boolean
   errorMessage: string
   showModal: boolean
@@ -17,7 +22,7 @@ interface State {
 
 const state: State = reactive({
   images: [],
-  upLoadFiles: [],
+  localImages: [],
   isLoading: false,
   errorMessage: '',
   showModal: false
@@ -50,17 +55,22 @@ const onFileChange = (event: Event) => {
   const files = input.files
   if (files) {
     for (let i = 0; i < files.length; i++) {
-      validateFile(files[i])
-      if (!state.errorMessage) {
-        const reader = new FileReader()
-        reader.onload = (e) => {
-          if (e.target?.result) {
-            state.images.push(e.target.result as string)
-          }
+      const file = files[i]
+      validateFile(file)
+      if (state.errorMessage) return
+      const reader = new FileReader()
+      reader.onload = (event) => {
+        const result = event.target?.result
+        if (result) {
+          state.images.push(result as string)
         }
-        reader.readAsDataURL(files[i])
       }
+      reader.readAsDataURL(file)
     }
+  }
+  const uploadFileElement = window.document.getElementById('upload-file') as HTMLInputElement | null
+  if (uploadFileElement) {
+    uploadFileElement.value = ''
   }
 }
 
@@ -98,12 +108,15 @@ const onSubmit = async () => {
     const formData = new FormData()
 
     for (let i = 0; i < state.images.length; i++) {
-      formData.append('files[]', state.images[i])
+      state.localImages.push({
+        name: `The image ${i + 1}`,
+        path: state.images[i]
+      })
+      formData.append(`The image ${i + 1}`, state.images[i])
     }
     const response = await axios.post('https://httpbin.org/post', formData)
     console.log(response.data)
 
-    state.upLoadFiles = response.data.files
     state.images = []
   } catch (error) {
     console.error('Error uploading files:', error)
