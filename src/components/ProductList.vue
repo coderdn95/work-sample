@@ -7,14 +7,9 @@ import axios from 'axios'
 import Modal from './Modal.vue'
 import Loading from './Loading.vue'
 
-interface localImage {
-  name: string
-  path: string | ArrayBuffer
-}
-
 interface State {
   images: string[]
-  localImages: localImage[]
+  localImages: string[]
   isLoading: boolean
   errorMessage: string
   showModal: boolean
@@ -108,10 +103,7 @@ const onSubmit = async () => {
     const formData = new FormData()
 
     for (let i = 0; i < state.images.length; i++) {
-      state.localImages.push({
-        name: `The image ${i + 1}`,
-        path: state.images[i]
-      })
+      state.localImages.push(state.images[i])
       formData.append(`The image ${i + 1}`, state.images[i])
     }
     const response = await axios.post('https://httpbin.org/post', formData)

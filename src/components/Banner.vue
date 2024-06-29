@@ -1,14 +1,18 @@
 <script setup lang="ts">
-const props = defineProps({
-  images: []
-})
+import { computed } from 'vue'
+
+const props = defineProps<{
+  images?: string[]
+}>()
+
+const localImages = computed(() => props.images ?? [])
 </script>
 
 <template>
   <aside class="banner">
     <p class="bannerDes">商品写真</p>
-    <div class="previewBox" v-for="(item, index) in props.images" :key="index">
-      <img :src="item.path" data-test="imageItem" class="imageItem" />
+    <div class="previewBox" v-for="(item, index) in localImages" :key="index">
+      <img :src="item" data-test="imageItem" class="imageItem" />
     </div>
   </aside>
 </template>
